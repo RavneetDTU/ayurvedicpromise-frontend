@@ -1,7 +1,13 @@
 import { getPublishedBlogs } from '@/lib/api';
-import { HomepageClient } from '@/components/public/HomepageClient';
+import { BlogListingClient } from '@/components/public/BlogListingClient';
 
-// Fallback blogs for build safety and initial presentation when database is empty
+export const revalidate = 60; // Incremental Static Regeneration (ISR) revalidate rate in seconds
+
+export const metadata = {
+  title: 'Hormonal Health Blog',
+  description: 'Read doctor-backed Ayurvedic articles on managing PCOS symptoms, weight gain, acne, fatigue, and hair fall naturally.',
+};
+
 const fallbackBlogs = [
   {
     id: '1',
@@ -11,7 +17,7 @@ const fallbackBlogs = [
     excerpt: 'Discover how Ayurveda looks at PCOS/PCOD not as a disease, but as a temporary dosha imbalance that can be resolved with lifestyle, herbs, and diet.',
     category: 'PCOS',
     featured_image_url: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=600&auto=format&fit=crop',
-    available_languages: ['en'],
+    available_languages: ['en', 'hi'],
     status: 'published' as const,
     author_id: 'doctor-1',
     created_at: new Date().toISOString(),
@@ -39,7 +45,7 @@ const fallbackBlogs = [
     excerpt: 'Struggling to lose weight despite eating less? It might be low Kapha metabolism. Follow this simple Ayurvedic meal guide to trigger fat burn.',
     category: 'Weight Loss',
     featured_image_url: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=600&auto=format&fit=crop',
-    available_languages: ['en'],
+    available_languages: ['en', 'hinglish'],
     status: 'published' as const,
     author_id: 'doctor-1',
     created_at: new Date().toISOString(),
@@ -47,20 +53,19 @@ const fallbackBlogs = [
   }
 ];
 
-export default async function Homepage() {
+export default async function BlogListingPage() {
   let blogs = [];
   try {
-    // Fetch with force-cache to enable Static Generation (SSG)
-    const fetched = await getPublishedBlogs('All', 1, 3, { cache: 'force-cache' });
+    const fetched = await getPublishedBlogs('All', 1, 100, { next: { revalidate: 60 } }); // Fetch up to 100 blogs for static filtering
     if (!fetched || fetched.length === 0) {
       blogs = fallbackBlogs;
     } else {
-      blogs = fetched.slice(0, 3);
+      blogs = fetched;
     }
   } catch (error) {
-    console.error('Failed to fetch published blogs:', error);
+    console.error('Failed to fetch blogs in list page:', error);
     blogs = fallbackBlogs;
   }
 
-  return <HomepageClient blogs={blogs} />;
+  return <BlogListingClient initialBlogs={blogs} />;
 }
