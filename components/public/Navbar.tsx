@@ -30,6 +30,18 @@ export const Navbar = () => {
     setIsOpen(false);
   }, [pathname]);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
@@ -88,7 +100,7 @@ export const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 top-[60px] md:hidden bg-cream-white z-30 flex flex-col items-center justify-center gap-8 p-6 animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="fixed top-16 left-0 w-full h-[calc(100vh-4rem)] bg-[#FDFAF7] z-30 flex flex-col items-center justify-start pt-16 gap-8 p-6 overflow-y-auto">
           <nav className="flex flex-col items-center gap-6">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
