@@ -110,7 +110,7 @@ export const HomepageClient: React.FC<HomepageClientProps> = ({ blogs }) => {
           {/* Right Image Placeholder (Wow Visual styling) */}
           <div className="md:col-span-5 relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-lg border border-border-light/50 bg-cream-dark/30">
             <Image
-              src="https://images.unsplash.com/photo-1594824813573-246434e33963?q=80&w=600&auto=format&fit=crop"
+              src="/images/doctor-hero.jpg"
               alt="Ayurvedic Doctor Consultation"
               fill
               className="object-cover"
@@ -211,7 +211,7 @@ export const HomepageClient: React.FC<HomepageClientProps> = ({ blogs }) => {
           {/* Doctor Image */}
           <div className="md:col-span-5 relative aspect-[4/5] rounded-2xl overflow-hidden shadow-md bg-cream-dark">
             <Image
-              src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=600&auto=format&fit=crop"
+              src="/images/doctor-priya.jpg"
               alt="Ayurvedic Doctor, Dr. Priya Sharma"
               fill
               className="object-cover"

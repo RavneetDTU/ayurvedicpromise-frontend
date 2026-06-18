@@ -39,7 +39,7 @@ export const Navbar = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
+        scrolled || isOpen
           ? 'bg-cream-white/95 backdrop-blur-md shadow-sm py-3 border-b border-border-light/40'
           : 'bg-transparent py-5'
       }`}
@@ -88,7 +88,7 @@ export const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 top-[68px] md:hidden bg-cream-white/98 z-30 flex flex-col items-center justify-center gap-8 p-6 animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="fixed inset-0 top-[60px] md:hidden bg-cream-white z-30 flex flex-col items-center justify-center gap-8 p-6 animate-in fade-in slide-in-from-top-4 duration-300">
           <nav className="flex flex-col items-center gap-6">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
