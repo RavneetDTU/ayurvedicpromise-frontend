@@ -33,6 +33,11 @@ export const metadata: Metadata = {
   },
   description:
     'Doctor-backed Ayurvedic treatment for PCOS, hair fall, weight gain, and irregular periods. Personalized plans for Indian women.',
+  icons: {
+    icon: '/images/logo.svg',
+    shortcut: '/images/logo.svg',
+    apple: '/images/logo.svg',
+  },
   openGraph: {
     siteName: 'Ayurvedic Promise',
     locale: 'en_IN',
