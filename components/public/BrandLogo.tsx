@@ -14,9 +14,9 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ variant = 'full', classNam
     <Image
       src="/images/logo.svg"
       alt="Ayurvedic Promise Logo"
-      width={40}
+      width={53}
       height={40}
-      className="w-10 h-10 select-none"
+      className="h-10 w-auto select-none"
       priority
     />
   );
